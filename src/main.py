@@ -160,7 +160,7 @@ def compute_measurements(landmarks, scaling_factor):
     thigh_factor = 0.8  
     wrist_factor = 0.25  
     neck_factor = 0.45
-    hip_factor = 1.2
+    hip_factor = 1.5
     
     waist_circ = circumference_approx(l_hip, r_hip, scaling_factor, factor=waist_factor)
     belly_circ = waist_circ * 1.1 
@@ -174,7 +174,7 @@ def compute_measurements(landmarks, scaling_factor):
     hand_length = dist_3d(l_wrist, l_index) * scaling_factor
     total_arm_length = upper_arm_length + hand_length
     
-    foot_length = dist_3d(l_heel, l_foot) * scaling_factor
+    foot_length = dist_3d(l_heel, l_foot) * 0.6 * scaling_factor
     adjusted_ankle_length = foot_length
     
     measurements = {
@@ -195,7 +195,7 @@ def main():
     reference_image_path = "C:/FaceRace/dataset/146cm.jpg"
 
     #ITO YUNG IPEPREDICT NA IMAGE
-    new_image_path = "C:/FaceRace/dataset/149cm.jpg"
+    new_image_path = "C:/FaceRace/dataset/163cm.jpg"
 
     focal_length, _, ref_norm_height = calibrate_reference(reference_image_path)
     new_distance_cm = 270 # Ito yung inaadjust para sa height **Bali kaylangan same distance (layo ng tao sa camera) sa ref image saka new image for more accuracy  
@@ -214,7 +214,6 @@ def main():
         bf_percent = None
 
     print(f"Dominant Race: {predicted_race}")
-    print(f"Estimated height: {real_height_new:.2f} cm")
     for key, value in measurements.items():
         print(f"{key}: {value:.2f}")
     print(f"Body Fat Percentage: {bf_percent:.2f}%")
